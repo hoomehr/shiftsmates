@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800px" height="600px" viewBox="0 0 800 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Career Transition</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#4F46E5" offset="0%"></stop>
+            <stop stop-color="#7C3AED" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(100, 100)">
+            <!-- Left Side - Current Career -->
+            <rect x="0" y="0" width="200" height="300" rx="20" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="2"></rect>
+            <text x="100" y="40" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#111827">Current Career</text>
+            
+            <circle cx="100" cy="100" r="40" fill="#E0E7FF" stroke="#4F46E5" stroke-width="2"></circle>
+            <text x="100" y="105" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#4F46E5">Skills</text>
+            
+            <rect x="40" y="170" width="120" height="30" rx="6" fill="#E0E7FF" stroke="#4F46E5" stroke-width="2"></rect>
+            <text x="100" y="190" font-family="Arial" font-size="14" text-anchor="middle" fill="#4F46E5">Experience</text>
+            
+            <rect x="40" y="220" width="120" height="30" rx="6" fill="#E0E7FF" stroke="#4F46E5" stroke-width="2"></rect>
+            <text x="100" y="240" font-family="Arial" font-size="14" text-anchor="middle" fill="#4F46E5">Knowledge</text>
+            
+            <!-- Right Side - New Career -->
+            <rect x="400" y="0" width="200" height="300" rx="20" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="2"></rect>
+            <text x="500" y="40" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#111827">New Career</text>
+            
+            <circle cx="500" cy="100" r="40" fill="#EDE9FE" stroke="#7C3AED" stroke-width="2"></circle>
+            <text x="500" y="105" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#7C3AED">Skills</text>
+            
+            <rect x="440" y="170" width="120" height="30" rx="6" fill="#EDE9FE" stroke="#7C3AED" stroke-width="2"></rect>
+            <text x="500" y="190" font-family="Arial" font-size="14" text-anchor="middle" fill="#7C3AED">Requirements</text>
+            
+            <rect x="440" y="220" width="120" height="30" rx="6" fill="#EDE9FE" stroke="#7C3AED" stroke-width="2"></rect>
+            <text x="500" y="240" font-family="Arial" font-size="14" text-anchor="middle" fill="#7C3AED">Opportunities</text>
+            
+            <!-- Middle - Transition -->
+            <path d="M210,150 C270,100 330,200 390,150" stroke="url(#linearGradient-1)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6,3"></path>
+            
+            <circle cx="300" cy="150" r="50" fill="white" stroke="url(#linearGradient-1)" stroke-width="3"></circle>
+            <text x="300" y="145" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#4F46E5">ShiftsMates</text>
+            <text x="300" y="165" font-family="Arial" font-size="12" text-anchor="middle" fill="#7C3AED">Career Transition</text>
+            
+            <!-- Bottom - Steps -->
+            <rect x="100" y="350" width="400" height="50" rx="25" fill="white" stroke="url(#linearGradient-1)" stroke-width="2"></rect>
+            
+            <circle cx="150" cy="375" r="15" fill="#4F46E5"></circle>
+            <text x="150" y="380" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="white">1</text>
+            <text x="150" y="405" font-family="Arial" font-size="12" text-anchor="middle" fill="#4F46E5">Analysis</text>
+            
+            <circle cx="250" cy="375" r="15" fill="#6366F1"></circle>
+            <text x="250" y="380" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="white">2</text>
+            <text x="250" y="405" font-family="Arial" font-size="12" text-anchor="middle" fill="#6366F1">Gap Identification</text>
+            
+            <circle cx="350" cy="375" r="15" fill="#8B5CF6"></circle>
+            <text x="350" y="380" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="white">3</text>
+            <text x="350" y="405" font-family="Arial" font-size="12" text-anchor="middle" fill="#8B5CF6">Learning</text>
+            
+            <circle cx="450" cy="375" r="15" fill="#7C3AED"></circle>
+            <text x="450" y="380" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="white">4</text>
+            <text x="450" y="405" font-family="Arial" font-size="12" text-anchor="middle" fill="#7C3AED">Transition</text>
+        </g>
+    </g>
+</svg>
