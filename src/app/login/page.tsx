@@ -5,16 +5,45 @@ import Link from 'next/link';
 import { FiMail, FiLock, FiUser, FiGithub, FiLinkedin } from 'react-icons/fi';
 import { Card } from '../../../theme/3d-card';
 import { motion } from 'framer-motion';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log({ email, password, rememberMe });
+    setIsLoading(true);
+    setError('');
+    
+    try {
+      const result = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
+      });
+
+      if (result?.error) {
+        setError('Invalid email or password');
+        setIsLoading(false);
+        return;
+      }
+
+      // Redirect to dashboard on successful login
+      router.push('/shift-analysis');
+    } catch (error) {
+      setError('An error occurred during login');
+      setIsLoading(false);
+    }
+  };
+  
+  const handleOAuthSignIn = (provider: string) => {
+    signIn(provider, { callbackUrl: '/shift-analysis' });
   };
 
   return (
@@ -34,6 +63,12 @@ export default function LoginPage() {
               Sign in to continue your career transition journey
             </p>
           </div>
+          
+          {error && (
+            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-xl">
+              {error}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
@@ -86,8 +121,6 @@ export default function LoginPage() {
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
                   className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                 />
                 <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
@@ -104,9 +137,10 @@ export default function LoginPage() {
             <div>
               <button
                 type="submit"
+                disabled={isLoading}
                 className="w-full px-4 py-3 rounded-xl bg-indigo-600 text-white font-medium transition-all hover:bg-indigo-700 shadow-[0_4px_14px_0_rgba(79,70,229,0.4)] hover:shadow-[0_6px_20px_0_rgba(79,70,229,0.6)] dark:shadow-[0_4px_14px_0_rgba(79,70,229,0.3)]"
               >
-                Sign In
+                {isLoading ? 'Signing in...' : 'Sign in'}
               </button>
             </div>
           </form>
@@ -125,14 +159,14 @@ export default function LoginPage() {
 
             <div className="mt-6 grid grid-cols-2 gap-3">
               <button
-                type="button"
+                onClick={() => handleOAuthSignIn('github')}
                 className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-xl shadow-sm bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
               >
                 <FiGithub className="h-5 w-5 mr-2" />
                 <span>GitHub</span>
               </button>
               <button
-                type="button"
+                onClick={() => handleOAuthSignIn('linkedin')}
                 className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-xl shadow-sm bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
               >
                 <FiLinkedin className="h-5 w-5 mr-2" />

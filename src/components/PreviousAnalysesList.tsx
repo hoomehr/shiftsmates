@@ -6,7 +6,7 @@ import { Card } from '../../theme/3d-card';
 import AnalysisModal from './AnalysisModal';
 
 // Mock data for previous analyses
-const mockPreviousAnalyses = [
+const mockPreviousAnalyses: Analysis[] = [
   {
     id: 1,
     date: "April 25, 2025",
@@ -41,7 +41,7 @@ const mockPreviousAnalyses = [
     skillGaps: [
       { name: "UI Design", importance: 95, currentLevel: 45 },
       { name: "Prototyping", importance: 90, currentLevel: 40 },
-      { name: "User Testing", importance: 85, transferability: 55 },
+      { name: "User Testing", importance: 85, currentLevel: 55 }, // Fixed: added currentLevel instead of transferability
       { name: "Design Tools", importance: 80, currentLevel: 30 },
     ]
   },

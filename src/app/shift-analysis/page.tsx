@@ -1,12 +1,85 @@
 "use client";
 
 import React, { useState } from 'react';
+import { Tab } from '@headlessui/react';
+import PreviousAnalysesList from '../../components/PreviousAnalysesList';
+import AnalysisModal from '../../components/AnalysisModal';
+import NewAnalysisForm, { AnalysisFormData } from '../../components/NewAnalysisForm';
+import { motion } from 'framer-motion';
 import { FiPlus } from 'react-icons/fi';
 import { Card } from '../../../theme/3d-card';
-import PreviousAnalysesList from '../../components/PreviousAnalysesList';
+
+// Define Analysis type to match the data structure
+interface Analysis {
+  id: number;
+  date: string;
+  currentCareer: string;
+  targetCareer: string;
+  matchPercentage: number;
+  transferableSkills: {
+    name: string;
+    level: number;
+    transferability: number;
+  }[];
+  skillGaps: {
+    name: string;
+    importance: number;
+    currentLevel: number;
+  }[];
+}
 
 export default function ShiftAnalysisPage() {
+  const [selectedAnalysis, setSelectedAnalysis] = useState<Analysis | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [showForm, setShowForm] = useState(false);
+
+  const handleViewDetails = (analysis: Analysis) => {
+    setSelectedAnalysis(analysis);
+    setIsModalOpen(true);
+  };
+
+  const handleNewAnalysisSubmit = async (data: AnalysisFormData) => {
+    setIsAnalyzing(true);
+    
+    // Simulate API call to analyze career transition
+    console.log('Submitting analysis data:', data);
+    
+    // In a real application, you would send this data to your backend
+    // const response = await fetch('/api/analyze-career', {
+    //   method: 'POST',
+    //   body: JSON.stringify(data),
+    // });
+    // const result = await response.json();
+    
+    // Simulate a delay for the analysis
+    setTimeout(() => {
+      setIsAnalyzing(false);
+      // Show the most recent analysis
+      const mockNewAnalysis = {
+        id: 4,
+        date: "April 25, 2025",
+        currentCareer: data.currentCareer,
+        targetCareer: data.targetCareer,
+        matchPercentage: Math.floor(Math.random() * 30) + 60, // Random score between 60-90
+        transferableSkills: [
+          { name: "Adaptability", level: 85, transferability: 90 },
+          { name: "Critical Thinking", level: 80, transferability: 85 },
+          { name: "Research", level: 75, transferability: 80 },
+          { name: "Communication", level: 90, transferability: 95 },
+        ],
+        skillGaps: [
+          { name: "Industry Knowledge", importance: 90, currentLevel: 40 },
+          { name: "Specialized Tools", importance: 85, currentLevel: 35 },
+          { name: "Technical Skills", importance: 80, currentLevel: 45 },
+          { name: "Certifications", importance: 75, currentLevel: 30 },
+        ]
+      };
+      
+      setSelectedAnalysis(mockNewAnalysis);
+      setIsModalOpen(true);
+    }, 3000);
+  };
 
   return (
     <div className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900 min-h-screen">
