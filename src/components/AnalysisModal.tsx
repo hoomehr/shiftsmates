@@ -81,30 +81,27 @@ export default function AnalysisModal({ isOpen, closeModal, analysis }: Analysis
                 </div>
 
                 <Tab.Group>
-                  <Tab.List className="flex space-x-1 rounded-xl bg-gray-100 dark:bg-gray-700 p-1 mb-6">
+                  <Tab.List className="flex p-1 space-x-1 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl mb-4">
                     <Tab
                       className={({ selected }) =>
-                        `w-full py-2.5 text-sm font-medium leading-5 rounded-lg transition-all
-                        ${
-                          selected
-                            ? 'bg-white dark:bg-gray-600 text-indigo-600 dark:text-indigo-400 shadow-sm'
-                            : 'text-gray-700 dark:text-gray-300 hover:bg-white/[0.12] dark:hover:bg-gray-600/[0.5] hover:text-gray-900 dark:hover:text-white'
-                        }`
+                        `w-full py-2.5 text-sm font-medium leading-5 rounded-lg transition-all duration-200 ${selected ? 'bg-white dark:bg-gray-800 shadow text-indigo-700 dark:text-indigo-400' : 'text-gray-700 dark:text-gray-400 hover:bg-white/[0.12] dark:hover:bg-gray-800/[0.12] hover:text-gray-900 dark:hover:text-gray-100'}`
                       }
                     >
                       Analysis Overview
                     </Tab>
                     <Tab
                       className={({ selected }) =>
-                        `w-full py-2.5 text-sm font-medium leading-5 rounded-lg transition-all
-                        ${
-                          selected
-                            ? 'bg-white dark:bg-gray-600 text-indigo-600 dark:text-indigo-400 shadow-sm'
-                            : 'text-gray-700 dark:text-gray-300 hover:bg-white/[0.12] dark:hover:bg-gray-600/[0.5] hover:text-gray-900 dark:hover:text-white'
-                        }`
+                        `w-full py-2.5 text-sm font-medium leading-5 rounded-lg transition-all duration-200 ${selected ? 'bg-white dark:bg-gray-800 shadow text-indigo-700 dark:text-indigo-400' : 'text-gray-700 dark:text-gray-400 hover:bg-white/[0.12] dark:hover:bg-gray-800/[0.12] hover:text-gray-900 dark:hover:text-gray-100'}`
                       }
                     >
                       Skill Gaps
+                    </Tab>
+                    <Tab
+                      className={({ selected }) =>
+                        `w-full py-2.5 text-sm font-medium leading-5 rounded-lg transition-all duration-200 ${selected ? 'bg-white dark:bg-gray-800 shadow text-indigo-700 dark:text-indigo-400' : 'text-gray-700 dark:text-gray-400 hover:bg-white/[0.12] dark:hover:bg-gray-800/[0.12] hover:text-gray-900 dark:hover:text-gray-100'}`
+                      }
+                    >
+                      Recommended Courses
                     </Tab>
                   </Tab.List>
                   <Tab.Panels>
@@ -389,6 +386,65 @@ export default function AnalysisModal({ isOpen, closeModal, analysis }: Analysis
                             <span>Complete projects that demonstrate your ability to work with big data</span>
                           </li>
                         </ul>
+                      </div>
+                    </Tab.Panel>
+                    
+                    <Tab.Panel className="focus:outline-none">
+                      {/* Recommended Courses Tab Content */}
+                      <div className="space-y-6">
+                        <div className="flex justify-between items-center mb-4">
+                          <h3 className="text-lg font-medium text-gray-900 dark:text-white">Recommended Courses</h3>
+                          <a 
+                            href="/courses" 
+                            className="inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-lg text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors"
+                          >
+                            View All Courses
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </a>
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-4">
+                          {/* Course recommendations based on skill gaps */}
+                          {analysis.skillGaps.map((skill, index) => (
+                            <a 
+                              key={index} 
+                              href={`/courses/${index + 1}`} 
+                              className="block bg-gray-50 dark:bg-gray-700 p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+                            >
+                              <div className="flex items-start">
+                                <div className="flex-shrink-0 bg-indigo-100 dark:bg-indigo-900/30 p-3 rounded-lg mr-4">
+                                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                  </svg>
+                                </div>
+                                <div>
+                                  <h4 className="font-medium text-gray-900 dark:text-white text-lg mb-1">
+                                    {skill.name} Masterclass
+                                  </h4>
+                                  <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                                    Comprehensive course to develop your {skill.name.toLowerCase()} skills for {analysis.targetCareer}.
+                                  </p>
+                                  <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                                    <span className="flex items-center mr-3">
+                                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                      </svg>
+                                      6 weeks
+                                    </span>
+                                    <span className="flex items-center">
+                                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                      </svg>
+                                      Beginner to Advanced
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </a>
+                          ))}
+                        </div>
                       </div>
                     </Tab.Panel>
                   </Tab.Panels>
