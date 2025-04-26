@@ -390,19 +390,21 @@ export default function AnalysisDetailPage() {
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
                     Skills to Develop
                   </h3>
-                  <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {analysis.skillGaps.map((skill, index) => (
-                      <div key={index} className="bg-gray-50 dark:bg-gray-700 p-4 rounded-xl">
+                      <Card key={index} className="bg-white dark:bg-gray-800 p-4 shadow-[0_4px_14px_0_rgba(79,70,229,0.25),_0_1px_5px_0_rgba(79,70,229,0.15)]">
                         <div className="flex justify-between items-start mb-2">
                           <div>
-                            <h4 className="font-medium text-gray-900 dark:text-white">{skill.name}</h4>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">Importance: {skill.importance}%</p>
+                            <h4 className="font-medium text-gray-900 dark:text-white text-lg">{skill.name}</h4>
+                            <div className="flex items-center mt-1">
+                              <span className="text-sm text-gray-500 dark:text-gray-400 mr-2">Importance: {skill.importance}%</span>
+                              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
+                                Gap: {skill.importance - skill.currentLevel}%
+                              </span>
+                            </div>
                           </div>
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
-                            Gap: {skill.importance - skill.currentLevel}%
-                          </span>
                         </div>
-                        <div className="mt-2">
+                        <div className="mt-3">
                           <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
                             <span>Current Level: {skill.currentLevel}%</span>
                             <span>Target Level: {skill.importance}%</span>
@@ -420,16 +422,26 @@ export default function AnalysisDetailPage() {
                             </div>
                           </div>
                         </div>
-                        <div className="mt-3">
-                          <h5 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Development Plan</h5>
+                        <div className="mt-4 border-t border-gray-100 dark:border-gray-700 pt-3">
+                          <h5 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Development Plan</h5>
                           <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1 list-disc list-inside">
                             <li>Take specialized courses in {skill.name}</li>
                             <li>Practice through hands-on projects</li>
                             <li>Join communities focused on {skill.name}</li>
-                            <li>Consider certification programs</li>
                           </ul>
                         </div>
-                      </div>
+                        <div className="mt-3 flex justify-end">
+                          <Link 
+                            href={`/courses/${index + 1}`}
+                            className="inline-flex items-center text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
+                          >
+                            Find courses
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                          </Link>
+                        </div>
+                      </Card>
                     ))}
                   </div>
                 </div>
