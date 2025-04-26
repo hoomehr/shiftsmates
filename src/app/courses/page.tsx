@@ -374,16 +374,18 @@ function CourseCard({ course }: CourseCardProps) {
             </div>
           </div>
           
-          <Link 
-            href={`/courses/${course.id}`}
-            className="w-full flex justify-center items-center px-4 py-2 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors group relative overflow-hidden"
-          >
-            <span className="absolute inset-0 bg-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-            <span className="relative flex items-center justify-center">
-              <FiExternalLink className="mr-2" />
-              <span className="group-hover:scale-105 transition-transform duration-300">View Course</span>
-            </span>
-          </Link>
+          <div className="relative group">
+            <Link 
+              href={`/courses/${course.id}`}
+              className="absolute inset-0 w-full h-full flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              aria-hidden="true"
+            >
+              <span className="px-4 py-2 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors flex items-center">
+                <FiExternalLink className="mr-2" />
+                View Course
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
     </Card>

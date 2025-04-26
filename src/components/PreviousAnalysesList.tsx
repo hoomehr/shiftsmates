@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import { FiBarChart2, FiArrowRight, FiCalendar, FiUser } from 'react-icons/fi';
 import { Card } from '../../theme/3d-card';
-import AnalysisModal from './AnalysisModal';
+import Link from 'next/link';
 
 // Mock data for previous analyses
 const mockPreviousAnalyses: Analysis[] = [
@@ -87,17 +87,6 @@ interface Analysis {
 }
 
 export default function PreviousAnalysesList() {
-  const [selectedAnalysis, setSelectedAnalysis] = useState<Analysis | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openAnalysisModal = (analysis: Analysis) => {
-    setSelectedAnalysis(analysis);
-    setIsModalOpen(true);
-  };
-
-  const closeAnalysisModal = () => {
-    setIsModalOpen(false);
-  };
 
   return (
     <div>
@@ -147,25 +136,17 @@ export default function PreviousAnalysesList() {
               
               {/* View Details Button (visible on hover) */}
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl flex items-end justify-center p-6">
-                <button
-                  onClick={() => openAnalysisModal(analysis)}
-                  className="w-full px-4 py-2 rounded-xl bg-indigo-600 text-white font-medium transition-all hover:bg-indigo-700 shadow-[0_4px_14px_0_rgba(79,70,229,0.4)] hover:shadow-[0_6px_20px_0_rgba(79,70,229,0.6)] dark:shadow-[0_4px_14px_0_rgba(79,70,229,0.3)]"
+                <Link
+                  href={`/shift-analysis/${analysis.id}`}
+                  className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
                 >
                   View Details
-                </button>
+                </Link>
               </div>
             </div>
           </Card>
         ))}
       </div>
-      
-      {selectedAnalysis && (
-        <AnalysisModal
-          isOpen={isModalOpen}
-          closeModal={closeAnalysisModal}
-          analysis={selectedAnalysis}
-        />
-      )}
     </div>
   );
 }
